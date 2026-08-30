@@ -245,7 +245,8 @@ Esse teste confirmou que o processo de atualização automatizado estava funcion
 ### ☁️ AWS
 - Amazon S3
 - Amazon EC2
-- AWS Systems Manager Session Manager
+- AWS Systems Manager
+- Session Manager
 - AWS IAM
 - AWS CLI
 
