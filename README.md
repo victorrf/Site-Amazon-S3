@@ -6,6 +6,7 @@ O laboratório teve como foco compreender, na prática, como utilizar a linha de
 
 Outro objetivo importante foi criar um processo de atualização repetível para o site, evitando a necessidade de executar manualmente todos os comandos de upload a cada alteração.
 
+<img src="Images/lab_resumido.png" style="width:600px;" alt="laboratório resumido">
 
 ## 🎯 Objetivo
 
@@ -97,6 +98,8 @@ O bucket foi utilizado como armazenamento dos arquivos necessários para o site 
 
 A utilização da AWS CLI permitiu realizar a criação do recurso sem depender exclusivamente do AWS Management Console.
 
+<img src="Images/1-Captura_de_tela.png" style="width:600px;" alt="diagrama do bucket S3">
+
 ### 4. Gerenciamento de acesso utilizando IAM 🔐
 
 Como parte do exercício, foi criado um usuário IAM denominado:
@@ -133,6 +136,8 @@ aws s3 website s3://*nome-do-bucket*/\ <br>
     --index-document index.html
 
 Após a configuração, o bucket passou a disponibilizar um endpoint específico para a hospedagem do site.
+
+<img src="Images/2-Captura_de_tela.png" style="width:500px;" alt="site antes da mudança">
 
 ### 6. Upload dos arquivos 📤
 
@@ -233,6 +238,8 @@ Após atualizar o navegador, as alterações foram refletidas no site.
 
 Esse teste confirmou que o processo de atualização automatizado estava funcionando corretamente.
 
+<img src="Images/3-Captura_de_tela.png" style="width:500px;" alt="Site atualizado">
+
 ## 🛠️ Ferramentas e Serviços
 
 ### ☁️ AWS
@@ -316,8 +323,11 @@ Em um ambiente real, eu buscaria:
 
 Esse exercício ajudou a compreender não apenas **como fazer uma configuração funcionar, mas também por que determinadas configurações podem representar riscos quando transportadas de um laboratório para um ambiente de produção**.
 
+
 ## 🏁 Conclusão
 
 Este projeto demonstrou a criação e publicação de um site estático utilizando **Amazon S3**, além da utilização da **AWS CLI em um ambiente Linux** para administrar recursos e automatizar tarefas.
 
 O principal resultado não foi apenas colocar um site no ar, mas compreender o fluxo entre **Linux → AWS CLI → IAM → S3 → hospedagem web**, além de desenvolver uma visão mais crítica sobre permissões, exposição pública e boas práticas de segurança.
+
+<img src="Images/projeto_resumido.png" style="width:600px;" alt="Projeto resumido">
