@@ -31,32 +31,7 @@ A partir dessa instância, foram executadas operações para criar e configurar 
 
 A arquitetura utilizada foi:
 
-                  Amazon EC2
-                 Amazon Linux
-                      │
-                      │ AWS CLI
-                      ▼
-                 ┌───────────┐
-                 │   IAM     │
-                 │Permissões │
-                 └─────┬─────┘
-                       │
-                       ▼
-                 ┌───────────┐
-                 │    S3     │
-                 │           │
-                 │ index.html│
-                 │    CSS    │
-                 │  imagens  │
-                 └─────┬─────┘
-                       │
-                       ▼
-                 Static Website
-                       │
-                       ▼
-                    🌐 Web
-                   Browser
-
+![Diagrama da Solução](Images/Diagrama-da-solução.png)
 
 ### 1. Acesso à instância Linux 🖥️
 
@@ -89,10 +64,10 @@ A partir desse momento, foi possível executar operações diretamente na infrae
 
 Um bucket foi criado utilizando a AWS CLI através do comando:
 
-aws s3api *create-bucket*\ <br>
-    --bucket *nome-do-bucket*\ <br>
-    --region us-west-2\ <br>
-    --create-bucket-configuration LocationConstraint=us-west-2
+`aws s3api *create-bucket*\` <br>
+`    --bucket *nome-do-bucket*\` <br>
+`    --region us-west-2\` <br>
+`    --create-bucket-configuration LocationConstraint=us-west-2`
 
 O bucket foi utilizado como armazenamento dos arquivos necessários para o site estático.
 
@@ -132,8 +107,8 @@ como documento principal.
 
 A configuração foi realizada através da AWS CLI:
 
-aws s3 website s3://*nome-do-bucket*/\ <br>
-    --index-document index.html
+`aws s3 website s3://*nome-do-bucket*/\` <br>
+`    --index-document index.html`
 
 Após a configuração, o bucket passou a disponibilizar um endpoint específico para a hospedagem do site.
 
@@ -153,11 +128,11 @@ static-website/ <br>
 
 Os arquivos foram enviados para o bucket através da AWS CLI:
 
-aws s3 cp\ <br>
-    /home/ec2-user/sysops-activity-files/static-website/\ <br>
-    s3://*nome-do-bucket*/\ <br>
-    --recursive\ <br>
-    --acl public-read
+`aws s3 cp\` <br>
+`    /home/ec2-user/sysops-activity-files/static-website/\` <br>
+`    s3://*nome-do-bucket*/\` <br>
+`    --recursive\` <br>
+`    --acl public-read`
 
 O parâmetro `--recursive` permitiu enviar todos os arquivos e diretórios da aplicação.
 
@@ -165,7 +140,7 @@ O parâmetro `--recursive` permitiu enviar todos os arquivos e diretórios da ap
 
 Para reproduzir o laboratório, o bucket foi configurado permitindo acesso público e os arquivos foram enviados utilizando:
 
---acl public-read
+`--acl public-read`
 
 Também foi necessário ajustar as configurações de acesso público e habilitar ACLs no bucket.
 
@@ -205,12 +180,12 @@ Para isso, foi criado o arquivo:
 
 O script contém o comando utilizado para copiar os arquivos atualizados para o bucket:
 
-#!/bin/bash <br>
-aws s3 cp\ <br>
-    /home/ec2-user/sysops-activity-files/static-website/\ <br>
-    s3://<nome-do-bucket>/\ <br>
-    --recursive\ <br>
-    --acl public-read
+`#!/bin/bash` <br>
+`aws s3 cp\` <br>
+ `   /home/ec2-user/sysops-activity-files/static-website/\` <br>
+ `   s3://<nome-do-bucket>/\` <br>
+ `   --recursive\` <br>
+ `   --acl public-read`
 
 Depois, o arquivo recebeu permissão de execução:
 
@@ -266,25 +241,7 @@ Ao final do projeto, foi criado um **site estático hospedado no Amazon S3**, ac
 
 O fluxo completo ficou:
 
-Alteração no código
-        │
-        ▼
-   index.html
-        │
-        ▼
-update-website.sh
-        │
-        ▼
-     AWS CLI
-        │
-        ▼
-   Amazon S3
-        │
-        ▼
- Static Website
-        │
-        ▼
-    Navegador
+![fluxo do resultado](Images/Fluxo-do-resultado.png)
 
 Além da hospedagem, foi criado um processo simples e repetível para atualizar os arquivos do site através de um script Bash.
 
